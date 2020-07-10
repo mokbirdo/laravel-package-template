@@ -7,6 +7,20 @@ use Illuminate\Support\ServiceProvider as LaravelServiceProvider;
 class ServiceProvider extends LaravelServiceProvider
 {
     /**
+     * ServiceProvider constructor.
+     * @param $app
+     */
+    public function __construct($app)
+    {
+        parent::__construct($app);
+        // Dev autoload
+        $autoload_path = str_replace('/', DIRECTORY_SEPARATOR, __DIR__ . '/../vendor/autoload.php');
+        if (file_exists($autoload_path)) {
+            require($autoload_path);
+        }
+    }
+
+    /**
      * Indicates if loading of the provider is deferred.
      *
      * @var bool
